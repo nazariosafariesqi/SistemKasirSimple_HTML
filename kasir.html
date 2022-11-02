@@ -1,0 +1,112 @@
+<!--
+    Nazario Safariesqi Tyo Widjaya
+    TI-4A
+    1941720233
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kasir</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <div class="background">
+                <div class="bg-image"></div>
+            </div>
+            <div class="bg-text">
+                <h1>Welcome To Nazario's Restaurant</h1>
+                <p>RESTORAN INI MENJUAL MENU-MENU CEPAT SAJI</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="biodata.html">Biodata</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                    <li><a href="kasir.html">Kasir</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main> 
+            <div id="content">
+                <article class="profile">
+                    <header>
+                        <h2>Masukkan Pesanan</h2>
+                    </header>
+                    <label for="id_pembeli">ID Pembeli</label>
+                    <input type="text" id="id_pembeli" name="id_pembeli" required>
+                    <label for="nama_pembeli">Nama Pembeli</label>
+                    <input type="text" id="nama_pembeli" name="nama_pembeli" required>
+                    <label for="status_pembeli">Status Pembeli</label><br>
+                    <input type="radio" id="status_pembeli" name="status_pembeli" value="Member" required>&nbsp;Member
+                    <input type="radio" id="status_pembeli" name="status_pembeli" value="Non-member" required>&nbsp;Non Member<br>
+                    <label for="nama_makanan">Nama Makanan</label>
+                    <select id="nama_makanan" name="nama_makanan">
+                        <option value="Pizza">Pizza</option>
+                        <option value="Spaghetti">Spaghetti</option>
+                        <option value="Burger">Burger</option>
+                        <option value="ChickenTortilla">Chicken Tortilla</option>
+                    </select>
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" id="jumlah" name="jumlah" required>
+                    <button type="submit" id="submit" name="submit" class="button" onclick="form_process()">Submit</button>     
+                    <div id="hasil_submit"></div>
+                </article>
+            </div>
+        </main>
+        <footer>
+            <p>Nazario's Restaurant &copy; 2020</p>
+        </footer>
+        <script>
+            var menu = ["Pizza", "Spaghetti", "Burger", "ChickenTortilla"];
+            
+            function form_process() {
+                var harga_makanan = 0;
+                var diskon = 0;
+                var id_pembeli = document.getElementById('id_pembeli').value;
+                var nama_pembeli= document.getElementById('nama_pembeli').value;
+                var status_pembeli = document.getElementById('status_pembeli').value;
+                var nama_makanan = document.getElementById('nama_makanan').value;
+                var jumlah = document.getElementById('jumlah').value;
+
+                if (nama_makanan == "Pizza") {
+                    harga_makanan = 100000;
+                } else if (nama_makanan == "Spaghetti") {
+                    harga_makanan = 50000;
+                } else if (nama_makanan == "Burger") {
+                    harga_makanan = 30000;
+                } else if(nama_makanan == "ChickenTortilla"){
+                    harga_makanan = 35000;
+                }
+
+                if (status_pembeli == "Member") {
+                    if (jumlah == 1) {
+                        diskon = harga_makanan * 0.05;
+                    } else if (jumlah <= 3) {
+                        diskon = harga_makanan * 0.07;
+                    } else {
+                        diskon = harga_makanan * 0.1;
+                    }
+                } else if(status_pembeli == "Non-member"){
+                    if (jumlah <= 3) {
+                        diskon = 0;
+                    } else if (jumlah <= 5) {
+                        diskon = (harga_makanan * jumlah) * 0.05;
+                    } else {
+                        diskon = harga_makanan * 0.05;
+                    }
+                }
+
+                total = (harga_makanan * jumlah) - diskon;
+                var par = document.createElement("h1")
+                var node = document.createTextNode(
+                    "TOTAL BAYAR : " + total
+                )
+                par.appendChild(node)
+                document.getElementById("hasil_submit").appendChild(par)
+            }
+        </script>
+    <body>
+<html>
